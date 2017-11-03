@@ -78,8 +78,8 @@ may have specific instructions in using the key so follow the instructions.
 >> + `sudo ufw allow 123/udp`
 >> + `sudo ufw enable`
 
-### Note:If you are using Lightsail,please enable custom connection on port 2200 from the browser based console.This really
-gave me big headache in the project.So,before u enable firewall,please change this setting.
+### Note:If you are using Lightsail,please enable custom connection on port 2200 from the browser based firewallconsole. 
+This really gave me big headache in the project.So,before u enable firewall,please change this setting.
 
 ## Configure the local timezone to UTC
 >> + Configure the time zone `sudo dpkg-reconfigure tzdata`.
@@ -174,8 +174,8 @@ What this snippet of code basically does is,adds the catalog folder into the pat
 and imports flask app as application entry point
 >> + `sudo service apache2 restart` restarts apache service
 
-### Note: Also had to,empty the `sudo nano /etc/apache2/sites-available/000-default.conf` file so that the default apache index.html
-was not showing up  when added url as a servername.Previously,ip address in server name worked but appending with url showed default
+Note: Also had to,empty the `sudo nano /etc/apache2/sites-available/000-default.conf` file so that the default apache index.html
+was not showing up  when added url as a servername.Previously,ip address in server name worked but amending with url showed default
 apache index page in html folder at /var/www/html.Need to dig in more inside serving multiple websites from same server.
 
 ##### Sources:[Digital Ocean Example](https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps),[Digital Ocean mod_wsgi ](https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps)
