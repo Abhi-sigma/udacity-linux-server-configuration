@@ -131,7 +131,7 @@ It should display "Running on http://127.0.0.1:5000/". If you see this message, 
 if any import error `pip install` that module while venv is activated.
 >> + To deactivate the environment : deactivate
 
-##Install WSGI Interface
+## Install WSGI Interface
 >> + WSGI (Web Server Gateway Interface) is an interface between web servers and web apps for python. Mod_wsgi is an Apache HTTP server mod that enables Apache to serve Flask applications. So the first step is to install python-dev (mod-wsgi is already installed ) `sudo apt-get install python-dev`
 >> + To enable mod_wsgi, run `sudo a2enmod wsgi`
 
@@ -141,7 +141,7 @@ if any import error `pip install` that module while venv is activated.
 >> + pasted the following,save and close
  ``` 
   <VirtualHost *:80>
-    ServerName 13.210.20.118
+    ServerName ec2-13-210-20-118.ap-southeast-2.compute.amazonaws.com
     WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/catalog/venv/lib/python2.7/site-packages
     WSGIProcessGroup catalog
     WSGIScriptAlias / /var/www/catalog/catalog.wsgi
@@ -150,7 +150,6 @@ if any import error `pip install` that module while venv is activated.
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost> 
 ```
->>>> + The ServerName is the public ip address
 >>>> + WSGIDaemonProcess is the process that starts when the request arrives and points to python virtual environment path
 from where the modules are loaded
 >>>> + WSGIScriptAlias is the path to catalog.wsgi which is a python file required for python  mod_wsgi interface
@@ -175,7 +174,11 @@ What this snippet of code basically does is,adds the catalog folder into the pat
 and imports flask app as application entry point
 >> + `sudo service apache2 restart` restarts apache service
 
-#####Sources:[Digital Ocean Example](https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps),[Digital Ocean mod_wsgi ](https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps)
+### Note: Also had to,empty the `sudo nano /etc/apache2/sites-available/000-default.conf` file so that the default apache index.html
+was not showing up  when added url as a servername.Previously,ip address in server name worked but appending with url showed default
+apache index page in html folder at /var/www/html.Need to dig in more inside serving multiple websites from same server.
+
+##### Sources:[Digital Ocean Example](https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps),[Digital Ocean mod_wsgi ](https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps)
 
 ### Other Changes
 >> + The clients secrete json files cant be accessed with the initial setup of application.So
